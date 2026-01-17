@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Berita Otomotif - Suzuki Sport Certified</title>
+    <style>
+        /* --- CSS ROOT (TEMA DARK SUZUKI) --- */
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1E1E1E;
+            --accent-yellow: #F9E200;
+            --text-main: #FFFFFF;
+            --text-muted: #B0B0B0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); }
+
+        /* --- CSS NAVBAR (RESPONSIF) --- */
+        nav {
+            background-color: #000;
+            border-bottom: 3px solid var(--accent-yellow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .logo { font-size: 24px; font-weight: 800; font-style: italic; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 5px; }
+        .logo i { color: var(--accent-yellow); font-size: 28px; font-style: normal; }
+        .logo span { color: var(--accent-yellow); font-weight: 300; margin-left: 5px; }
+        
+        .nav-links { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
+        .nav-links a { color: #B0B0B0; text-decoration: none; font-weight: 700; text-transform: uppercase; font-size: 14px; transition: 0.3s; position: relative; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-yellow); }
+        
+        /* Hamburger Menu */
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; }
+        .bar { width: 25px; height: 3px; background-color: var(--accent-yellow); margin: 3px 0; transition: 0.4s; }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            .nav-links { display: none; width: 100%; position: absolute; top: 100%; left: 0; background-color: #000; flex-direction: column; text-align: center; padding: 20px 0; border-bottom: 2px solid var(--accent-yellow); }
+            .nav-links.active { display: flex; }
+            .nav-links li { margin: 15px 0; }
+        }
+
+        /* --- LAYOUT BLOG --- */
+        .page-header {
+            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://placehold.co/1200x400/222/555?text=Blog+Otomotif+Suzuki');
+            padding: 60px 5%;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+        .page-header h1 { font-size: 42px; margin-bottom: 10px; text-transform: uppercase; }
+        .page-header p { color: var(--text-muted); font-size: 18px; }
+
+        .blog-container { display: flex; padding: 50px 5%; gap: 40px; flex-wrap: wrap; }
+
+        /* KOLOM KIRI: ARTIKEL (70%) */
+        .main-content { flex: 3; min-width: 300px; }
+
+        .featured-post {
+            background-color: var(--bg-card); border: 1px solid #333; margin-bottom: 40px; position: relative; overflow: hidden; transition: 0.3s;
+        }
+        .featured-post:hover { border-color: var(--accent-yellow); }
+        .featured-img { width: 100%; height: 350px; object-fit: cover; background: #333; }
+        .featured-content { padding: 30px; }
+        .post-meta { color: var(--accent-yellow); font-size: 13px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; display: block;}
+        .featured-title { font-size: 28px; margin-bottom: 15px; color: #fff; line-height: 1.3; }
+        .featured-excerpt { color: #ccc; line-height: 1.6; margin-bottom: 20px; }
+
+        /* Grid Artikel Biasa */
+        .posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+
+        .post-card {
+            background-color: var(--bg-card); border: 1px solid #333; transition: 0.3s; display: flex; flex-direction: column;
+        }
+        .post-card:hover { transform: translateY(-5px); border-color: var(--accent-yellow); }
+        .post-img { width: 100%; height: 200px; object-fit: cover; background: #333; }
+        .post-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+        .post-title { font-size: 18px; font-weight: bold; margin-bottom: 10px; color: #fff; line-height: 1.4; }
+        .post-desc { font-size: 14px; color: #aaa; line-height: 1.6; margin-bottom: 15px; flex: 1; }
+        .read-more { color: var(--accent-yellow); text-decoration: none; font-weight: bold; font-size: 14px; text-transform: uppercase; align-self: flex-start; }
+        .read-more:hover { text-decoration: underline; }
+
+        /* KOLOM KANAN: SIDEBAR (30%) */
+        .sidebar { flex: 1; min-width: 250px; }
+
+        .widget { background-color: var(--bg-card); padding: 25px; border: 1px solid #333; margin-bottom: 30px; }
+        .widget h3 { border-left: 4px solid var(--accent-yellow); padding-left: 10px; margin-bottom: 20px; color: #fff; text-transform: uppercase; font-size: 18px; }
+
+        .search-box { display: flex; }
+        .search-box input { width: 100%; padding: 10px; background: #000; border: 1px solid #444; color: #fff; }
+        .search-box button { background: var(--accent-yellow); border: none; padding: 0 15px; cursor: pointer; font-weight: bold; }
+
+        .cat-list { list-style: none; }
+        .cat-list li { border-bottom: 1px solid #333; padding: 10px 0; }
+        .cat-list a { color: #ccc; text-decoration: none; display: flex; justify-content: space-between; transition: 0.3s; cursor: pointer;}
+        .cat-list a:hover { color: var(--accent-yellow); padding-left: 5px; }
+        .cat-list span { background: #000; padding: 2px 8px; font-size: 12px; border-radius: 10px; }
+
+        .tag-cloud { display: flex; flex-wrap: wrap; gap: 10px; }
+        .tag { background: #000; color: #aaa; padding: 5px 10px; text-decoration: none; font-size: 13px; border: 1px solid #333; cursor: pointer; }
+        .tag:hover, .tag.active { border-color: var(--accent-yellow); color: var(--accent-yellow); }
+
+        .pagination { display: flex; gap: 10px; margin-top: 40px; justify-content: center; }
+        .page-num { padding: 10px 15px; background: var(--bg-card); color: #fff; text-decoration: none; border: 1px solid #333; cursor: pointer; }
+        .page-num.active, .page-num:hover { background: var(--accent-yellow); color: #000; font-weight: bold; border-color: var(--accent-yellow); }
+
+        footer { background: #000; padding: 20px 5%; margin-top: 50px; color: #555; border-top: 2px solid var(--accent-yellow); }
+
+        @media (max-width: 768px) {
+            .blog-container { flex-direction: column; }
+            .sidebar { order: 2; }
+            .main-content { order: 1; }
+        }
+        
+        /* Indikator Filter Aktif */
+        #activeFilter {
+            display: none;
+            background: var(--accent-yellow);
+            color: black;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #activeFilter span { cursor: pointer; font-size: 18px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <i>S</i> SUZUKI <span>SPORT CERTIFIED</span>
+        </a>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+        <ul class="nav-links" id="navMenu">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="stok.html">Stok Unit</a></li>
+            <li><a href="tradein.html">Trade-In</a></li>
+            <li><a href="kalkulator.html">Kalkulator</a></li>
+            <li><a href="service.html">Layanan</a></li>
+            <li><a href="blog.html" class="active">Blog</a></li> </ul>
+    </nav>
+
+    <div class="page-header">
+        <h1>Berita & Tips Otomotif</h1>
+        <p>Informasi terbaru seputar perawatan mobil, harga pasar, dan tips berkendara.</p>
+    </div>
+
+    <div class="blog-container">
+        
+        <div class="main-content">
+            
+            <div id="activeFilter">
+                <text id="filterText">Menampilkan hasil untuk: ...</text>
+                <span onclick="resetFilter()">×</span>
+            </div>
+
+            <div class="featured-post post-item" data-category="Tips" data-tags="xl7 hybrid">
+                <img src="https://placehold.co/800x400/222/555?text=Tips+Merawat+Mobil+Hybrid" class="featured-img" alt="Featured">
+                <div class="featured-content">
+                    <span class="post-meta">Tips & Trik | 17 Jan 2026</span>
+                    <h2 class="featured-title">Cara Merawat Baterai Suzuki XL7 Hybrid Agar Awet 10 Tahun</h2>
+                    <p class="featured-excerpt">Teknologi SHVS (Smart Hybrid Vehicle by Suzuki) memang canggih, namun membutuhkan perlakuan khusus agar baterai Lithium-ion tetap optimal. Simak panduan lengkap dari kepala mekanik kami.</p>
+                    <a href="#" class="read-more">BACA SELENGKAPNYA →</a>
+                </div>
+            </div>
+
+            <div class="posts-grid" id="postsGrid">
+                
+                <div class="post-card post-item" data-category="Review" data-tags="jimny review">
+                    <img src="https://placehold.co/400x300/222/555?text=Review+Jimny" class="post-img">
+                    <div class="post-body">
+                        <span class="post-meta">Review</span>
+                        <h3 class="post-title">Review Jujur: Jimny 5-Pintu Setelah 1 Tahun Pemakaian</h3>
+                        <p class="post-desc">Apakah masih worth it untuk harian di jalanan macet Jakarta? Atau hanya cocok untuk offroad akhir pekan?</p>
+                        <a href="#" class="read-more">Baca Selengkapnya</a>
+                    </div>
+                </div>
+
+                <div class="post-card post-item" data-category="Analisa" data-tags="harga ertiga">
+                    <img src="https://placehold.co/400x300/222/555?text=Harga+Jual+Ertiga" class="post-img">
+                    <div class="post-body">
+                        <span class="post-meta">Analisa Pasar</span>
+                        <h3 class="post-title">Kenapa Harga Bekas Ertiga Sangat Stabil di Malang?</h3>
+                        <p class="post-desc">Data menunjukkan depresiasi Ertiga lebih rendah dibanding kompetitornya. Faktor sparepart dan konsumsi BBM jadi kunci.</p>
+                        <a href="#" class="read-more">Baca Selengkapnya</a>
+                    </div>
+                </div>
+
+                <div class="post-card post-item" data-category="Tips" data-tags="tips beli mobil">
+                    <img src="https://placehold.co/400x300/222/555?text=Ciri+Mobil+Banjir" class="post-img">
+                    <div class="post-body">
+                        <span class="post-meta">Tips Membeli</span>
+                        <h3 class="post-title">5 Tanda Mobil Bekas Banjir yang Sering Terlewatkan</h3>
+                        <p class="post-desc">Jangan tertipu tampilan kinclong. Cek bagian-bagian tersembunyi ini sebelum Anda memutuskan membeli mobil bekas.</p>
+                        <a href="#" class="read-more">Baca Selengkapnya</a>
+                    </div>
+                </div>
+
+                <div class="post-card post-item" data-category="Promo" data-tags="promo tradein">
+                    <img src="https://placehold.co/400x300/222/555?text=Promo+Awal+Tahun" class="post-img">
+                    <div class="post-body">
+                        <span class="post-meta">Promo</span>
+                        <h3 class="post-title">Promo Trade-In Awal Tahun 2026: Cashback hingga 5 Juta</h3>
+                        <p class="post-desc">Kesempatan emas untuk upgrade mobil lama Anda ke unit Suzuki Sport Certified terbaru.</p>
+                        <a href="#" class="read-more">Baca Selengkapnya</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pagination" id="pagination">
+                <a onclick="changePage(this)" class="page-num active">1</a>
+                <a onclick="changePage(this)" class="page-num">2</a>
+                <a onclick="changePage(this)" class="page-num">3</a>
+                <a onclick="changePage(this)" class="page-num">Next →</a>
+            </div>
+
+        </div>
+
+        <aside class="sidebar">
+            
+            <div class="widget">
+                <h3>Cari Artikel</h3>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Ketik kata kunci..." onkeyup="searchBlog()">
+                    <button onclick="searchBlog()">🔍</button>
+                </div>
+            </div>
+
+            <div class="widget">
+                <h3>Kategori</h3>
+                <ul class="cat-list">
+                    <li><a onclick="filterCategory('Tips')">Tips & Perawatan <span>12</span></a></li>
+                    <li><a onclick="filterCategory('Review')">Review Mobil <span>8</span></a></li>
+                    <li><a onclick="filterCategory('Analisa')">Berita & Analisa <span>5</span></a></li>
+                    <li><a onclick="filterCategory('Promo')">Promo & Event <span>3</span></a></li>
+                </ul>
+            </div>
+
+            <div class="widget">
+                <h3>Tag Populer</h3>
+                <div class="tag-cloud">
+                    <a onclick="filterTag('hybrid')" class="tag">#XL7Hybrid</a>
+                    <a onclick="filterTag('jimny')" class="tag">#JimnyIndonesia</a>
+                    <a onclick="filterTag('harga')" class="tag">#HargaMobil</a>
+                    <a onclick="filterTag('tips')" class="tag">#TipsOtomotif</a>
+                </div>
+            </div>
+
+            <div class="widget" style="text-align: center; border: 2px dashed var(--accent-yellow);">
+                <h4 style="color: #fff; margin-bottom: 10px;">Ingin Jual Mobil?</h4>
+                <p style="color: #aaa; font-size: 13px; margin-bottom: 15px;">Dapatkan penawaran harga terbaik hari ini.</p>
+                <a href="tradein.html" style="background: var(--accent-yellow); color: black; padding: 8px 15px; text-decoration: none; font-weight: bold; font-size: 12px; display: inline-block;">CEK HARGA SEKARANG</a>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Suzuki Sport Certified.</p>
+    </footer>
+
+    <script>
+        // 1. Toggle Menu Navbar HP
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        // 2. Fungsi Pencarian Real-time
+        function searchBlog() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let posts = document.getElementsByClassName('post-item');
+            
+            for (let i = 0; i < posts.length; i++) {
+                let title = posts[i].getElementsByTagName('h2')[0] || posts[i].getElementsByTagName('h3')[0];
+                let desc = posts[i].getElementsByTagName('p')[0];
+                
+                let titleText = title ? title.textContent || title.innerText : "";
+                let descText = desc ? desc.textContent || desc.innerText : "";
+
+                if (titleText.toLowerCase().indexOf(input) > -1 || descText.toLowerCase().indexOf(input) > -1) {
+                    posts[i].style.display = "";
+                } else {
+                    posts[i].style.display = "none";
+                }
+            }
+        }
+
+        // 3. Fungsi Filter Kategori
+        function filterCategory(cat) {
+            let posts = document.getElementsByClassName('post-item');
+            let filterBox = document.getElementById('activeFilter');
+            let filterText = document.getElementById('filterText');
+
+            filterBox.style.display = "flex";
+            filterText.innerHTML = "Kategori: " + cat;
+
+            for (let i = 0; i < posts.length; i++) {
+                let postCat = posts[i].getAttribute('data-category');
+                if (postCat === cat) {
+                    posts[i].style.display = "";
+                } else {
+                    posts[i].style.display = "none";
+                }
+            }
+        }
+
+        // 4. Fungsi Filter Tag
+        function filterTag(tagKeyword) {
+            let posts = document.getElementsByClassName('post-item');
+            let filterBox = document.getElementById('activeFilter');
+            let filterText = document.getElementById('filterText');
+
+            filterBox.style.display = "flex";
+            filterText.innerHTML = "Tag: #" + tagKeyword;
+
+            for (let i = 0; i < posts.length; i++) {
+                let postTags = posts[i].getAttribute('data-tags');
+                if (postTags.includes(tagKeyword)) {
+                    posts[i].style.display = "";
+                } else {
+                    posts[i].style.display = "none";
+                }
+            }
+        }
+
+        // 5. Reset Filter
+        function resetFilter() {
+            let posts = document.getElementsByClassName('post-item');
+            document.getElementById('activeFilter').style.display = "none";
+            document.getElementById('searchInput').value = "";
+            
+            for (let i = 0; i < posts.length; i++) {
+                posts[i].style.display = "";
+            }
+        }
+
+        // 6. Pagination Visual
+        function changePage(element) {
+            // Hapus class active dari semua tombol
+            let pages = document.getElementsByClassName('page-num');
+            for(let i=0; i<pages.length; i++){
+                pages[i].classList.remove('active');
+            }
+            // Tambah class active ke yang diklik
+            element.classList.add('active');
+            
+            // Scroll ke atas
+            window.scrollTo({top: 400, behavior: 'smooth'});
+        }
+    </script>
+
+</body>
+</html>

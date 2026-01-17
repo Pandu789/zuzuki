@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Kredit - Suzuki Sport Certified</title>
+    <style>
+        /* --- CSS ROOT & NAV (SAMA SEPERTI HALAMAN LAIN) --- */
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1E1E1E;
+            --accent-yellow: #F9E200;
+            --text-main: #FFFFFF;
+            --text-muted: #B0B0B0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); }
+        
+        nav { background: #000; border-bottom: 3px solid var(--accent-yellow); padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 800; font-style: italic; color: #fff; }
+        .logo span { color: var(--accent-yellow); font-weight: 300; }
+        .nav-links a { color: #aaa; text-decoration: none; margin-left: 20px; font-weight: bold; text-transform: uppercase; font-size: 14px; }
+        .nav-links a:hover { color: var(--accent-yellow); }
+
+        /* --- LAYOUT KALKULATOR --- */
+        .page-header {
+            padding: 60px 5%;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://placehold.co/1200x400/222/555?text=Simulasi+Kredit+Suzuki');
+            background-size: cover;
+            border-bottom: 1px solid #333;
+        }
+        .page-header h1 { font-size: 40px; margin-bottom: 10px; text-transform: uppercase; }
+
+        .calc-container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 50px auto;
+            background-color: var(--bg-card);
+            border: 1px solid #333;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        /* KOLOM KIRI (INPUT) */
+        .calc-input {
+            flex: 1;
+            min-width: 350px;
+            padding: 40px;
+            border-right: 1px solid #333;
+        }
+
+        .input-group { margin-bottom: 30px; }
+        .input-group label { display: flex; justify-content: space-between; margin-bottom: 10px; color: var(--accent-yellow); font-weight: bold; font-size: 14px; }
+        .input-group span { color: #fff; } /* Nilai angka di label */
+
+        /* Styling Range Slider */
+        input[type=range] {
+            width: 100%;
+            -webkit-appearance: none;
+            background: #000;
+            height: 8px;
+            border-radius: 5px;
+            outline: none;
+            border: 1px solid #444;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px; height: 25px;
+            background: var(--accent-yellow);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+        .radio-group { display: flex; gap: 10px; margin-top: 10px; }
+        .radio-btn {
+            flex: 1;
+            padding: 10px;
+            background: #000;
+            border: 1px solid #444;
+            color: #aaa;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        /* Class active untuk tenor yang dipilih */
+        .radio-btn.active {
+            background: var(--accent-yellow);
+            color: #000;
+            font-weight: bold;
+            border-color: var(--accent-yellow);
+        }
+
+        /* KOLOM KANAN (HASIL) */
+        .calc-result {
+            flex: 1;
+            min-width: 350px;
+            padding: 40px;
+            background-color: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .result-title { color: #aaa; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .result-amount { font-size: 48px; font-weight: 800; color: var(--accent-yellow); margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 30px; }
+
+        .breakdown-item { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 14px; }
+        .breakdown-item b { color: #fff; }
+        
+        .btn-apply {
+            margin-top: 20px;
+            background: var(--text-main);
+            color: #000;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .btn-apply:hover { background: var(--accent-yellow); }
+
+        .disclaimer { font-size: 12px; color: #555; margin-top: 20px; line-height: 1.5; font-style: italic; }
+
+        footer { background: #000; padding: 20px 5%; margin-top: 50px; color: #555; border-top: 2px solid var(--accent-yellow); }
+nav {
+            background-color: #000000;
+            border-bottom: 3px solid #F9E200; /* Kuning Suzuki Sport */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            font-style: italic;
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .logo i {
+            color: #F9E200; /* Logo S Kuning */
+            font-size: 28px;
+            font-style: normal;
+        }
+
+        .logo span {
+            color: #F9E200;
+            font-weight: 300;
+            margin-left: 5px;
+        }
+
+        /* Menu Desktop */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: #B0B0B0;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 14px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #F9E200;
+        }
+
+        /* Garis bawah animasi saat hover */
+        .nav-links a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #F9E200;
+            transition: width 0.3s;
+            margin-top: 3px;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Tombol Hamburger (Mobile) */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #F9E200;
+            margin: 3px 0;
+            transition: 0.4s;
+        }
+
+        /* RESPONSIVE (TAMPILAN HP) */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex; /* Munculkan tombol hamburger */
+            }
+
+            .nav-links {
+                display: none; /* Sembunyikan menu desktop */
+                width: 100%;
+                position: absolute;
+                top: 100%; /* Muncul tepat di bawah navbar */
+                left: 0;
+                background-color: #000;
+                flex-direction: column;
+                text-align: center;
+                padding: 20px 0;
+                border-bottom: 2px solid #F9E200;
+            }
+
+            .nav-links.active {
+                display: flex; /* Munculkan menu saat tombol diklik */
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+   <nav>
+        <a href="index.html" class="logo">
+            <i>S</i> SUZUKI <span>SPORT CERTIFIED</span>
+        </a>
+
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+        <ul class="nav-links" id="navMenu">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="stok.html">Stok Unit</a></li>
+            <li><a href="tradein.html">Trade-In</a></li>
+            <li><a href="kalkulator.html">Simulasi Kredit</a></li>
+            <li><a href="service.html">Layanan</a></li>
+            <li><a href="about.html">Tentang Kami</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        // Script untuk membuka/tutup menu di HP
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Script Otomatis Menandai Halaman Aktif (Opsional)
+        // Ini akan membuat menu berwarna kuning sesuai halaman yang sedang dibuka
+        document.addEventListener("DOMContentLoaded", function() {
+            const currentLocation = location.href;
+            const menuItem = document.querySelectorAll('.nav-links a');
+            const menuLength = menuItem.length;
+            for (let i = 0; i < menuLength; i++) {
+                if (menuItem[i].href === currentLocation) {
+                    menuItem[i].className = "active";
+                }
+            }
+        });
+    </script>
+
+    <div class="page-header">
+        <h1>Simulasi Kredit</h1>
+        <p style="color: #aaa;">Rencanakan pembelian mobil impian Anda dengan bijak.</p>
+    </div>
+
+    <div class="calc-container">
+        
+        <div class="calc-input">
+            
+            <div class="input-group">
+                <label>Harga Mobil <span id="labelHarga">Rp 250.000.000</span></label>
+                <input type="range" id="inputHarga" min="100000000" max="800000000" step="5000000" value="250000000" oninput="hitungKredit()">
+            </div>
+
+            <div class="input-group">
+                <label>Uang Muka (DP) <span id="labelDp">30% (Rp 75.000.000)</span></label>
+                <input type="range" id="inputDp" min="20" max="70" step="5" value="30" oninput="hitungKredit()">
+            </div>
+
+            <div class="input-group">
+                <label>Bunga per Tahun <span id="labelBunga">8%</span></label>
+                <input type="range" id="inputBunga" min="5" max="15" step="0.5" value="8" oninput="hitungKredit()">
+            </div>
+
+            <div class="input-group">
+                <label>Jangka Waktu (Tahun)</label>
+                <div class="radio-group" id="tenorGroup">
+                    <div class="radio-btn" onclick="setTenor(1, this)">1</div>
+                    <div class="radio-btn" onclick="setTenor(2, this)">2</div>
+                    <div class="radio-btn active" onclick="setTenor(3, this)">3</div> <div class="radio-btn" onclick="setTenor(4, this)">4</div>
+                    <div class="radio-btn" onclick="setTenor(5, this)">5</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="calc-result">
+            <div class="result-title">Estimasi Cicilan per Bulan</div>
+            <div class="result-amount" id="hasilCicilan">Rp 0</div>
+
+            <div class="breakdown-item">
+                <span>Pokok Hutang</span>
+                <b id="hasilPokok">Rp 0</b>
+            </div>
+            <div class="breakdown-item">
+                <span>Total Bunga</span>
+                <b id="hasilTotalBunga">Rp 0</b>
+            </div>
+            <div class="breakdown-item">
+                <span>Total DP Dibayar</span>
+                <b id="hasilTotalDp" style="color: var(--accent-yellow)">Rp 0</b>
+            </div>
+
+            <a href="stok.html" class="btn-apply">Lihat Stok Mobil</a>
+            
+            <p class="disclaimer">
+                *Perhitungan ini hanya simulasi (Flat Rate). Harga OTR, Bunga, dan biaya admin dapat berubah sewaktu-waktu sesuai kebijakan leasing dan area wilayah.
+            </p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Suzuki Sport Certified.</p>
+    </footer>
+
+    <script>
+        let tenorTahun = 3; // Default tenor
+
+        // Fungsi memilih Tenor (Tahun)
+        function setTenor(tahun, element) {
+            tenorTahun = tahun;
+            
+            // Hapus class active dari semua tombol
+            let buttons = document.querySelectorAll('.radio-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Tambah class active ke tombol yang diklik
+            element.classList.add('active');
+            
+            // Hitung ulang
+            hitungKredit();
+        }
+
+        // Format Rupiah
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumSignificantDigits: 9 }).format(angka);
+        }
+
+        // Fungsi Hitung Utama
+        function hitungKredit() {
+            // Ambil nilai dari input
+            let hargaMobil = parseFloat(document.getElementById('inputHarga').value);
+            let dpPersen = parseFloat(document.getElementById('inputDp').value);
+            let bungaPersen = parseFloat(document.getElementById('inputBunga').value);
+
+            // Hitung Variabel
+            let dpNominal = hargaMobil * (dpPersen / 100);
+            let pokokHutang = hargaMobil - dpNominal;
+            let totalBunga = pokokHutang * (bungaPersen / 100) * tenorTahun;
+            let totalHutang = pokokHutang + totalBunga;
+            let bulan = tenorTahun * 12;
+            let cicilanPerBulan = totalHutang / bulan;
+
+            // Update Teks Label di Input
+            document.getElementById('labelHarga').innerText = formatRupiah(hargaMobil);
+            document.getElementById('labelDp').innerText = dpPersen + "% (" + formatRupiah(dpNominal) + ")";
+            document.getElementById('labelBunga').innerText = bungaPersen + "%";
+
+            // Update Hasil Perhitungan di Kanan
+            document.getElementById('hasilCicilan').innerText = formatRupiah(cicilanPerBulan);
+            document.getElementById('hasilPokok').innerText = formatRupiah(pokokHutang);
+            document.getElementById('hasilTotalBunga').innerText = formatRupiah(totalBunga);
+            document.getElementById('hasilTotalDp').innerText = formatRupiah(dpNominal);
+        }
+
+        // Jalankan perhitungan saat halaman pertama kali dimuat
+        window.onload = hitungKredit;
+
+    </script>
+
+</body>
+</html>

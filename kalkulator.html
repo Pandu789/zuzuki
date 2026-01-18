@@ -5,29 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulator Kredit - Suzuki Sport Certified</title>
     <style>
-        /* --- CSS ROOT & NAV (SAMA SEPERTI HALAMAN LAIN) --- */
+        /* =========================================
+           1. SETUP DASAR & VARIABEL WARNA
+           ========================================= */
         :root {
             --bg-dark: #121212;
             --bg-card: #1E1E1E;
-            --accent-yellow: #F9E200;
+            
+            /* TEMA BARU: MERAH & BIRU */
+            --accent-blue: #2979FF; /* Biru Elektrik */
+            --accent-red: #E60012;  /* Merah Sport */
+            
             --text-main: #FFFFFF;
             --text-muted: #B0B0B0;
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
         body { background-color: var(--bg-dark); color: var(--text-main); }
         
-        nav { background: #000; border-bottom: 3px solid var(--accent-yellow); padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 24px; font-weight: 800; font-style: italic; color: #fff; }
-        .logo span { color: var(--accent-yellow); font-weight: 300; }
-        .nav-links a { color: #aaa; text-decoration: none; margin-left: 20px; font-weight: bold; text-transform: uppercase; font-size: 14px; }
-        .nav-links a:hover { color: var(--accent-yellow); }
+        /* =========================================
+           2. NAVBAR STYLING (SUDAH DIRAPIKAN)
+           ========================================= */
+        nav { 
+            background: #000; 
+            border-bottom: 3px solid var(--accent-red); /* Border Merah */
+            padding: 15px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        
+        /* Logo */
+        .logo { 
+            font-size: 24px; font-weight: 800; font-style: italic; color: #fff; text-decoration: none; 
+            display: flex; align-items: center; gap: 5px; 
+        }
+        .logo i { color: var(--accent-red); font-size: 28px; font-style: normal; } /* Logo S Merah */
+        .logo span { color: var(--accent-blue); font-weight: 300; margin-left: 5px; } /* Teks Sport Biru */
+        
+        /* Menu Desktop */
+        .nav-links { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
+        .nav-links a { 
+            color: #aaa; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 14px; 
+            transition: 0.3s; position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-blue); } /* Hover Biru */
 
-        /* --- LAYOUT KALKULATOR --- */
+        /* Garis Bawah Animasi */
+        .nav-links a::after {
+            content: ''; display: block; width: 0; height: 2px;
+            background: var(--accent-blue); transition: width 0.3s; margin-top: 3px;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+        /* Hamburger Menu (Mobile) */
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; }
+        .bar { width: 25px; height: 3px; background-color: var(--accent-blue); margin: 3px 0; transition: 0.4s; }
+
+        /* =========================================
+           3. LAYOUT KALKULATOR
+           ========================================= */
         .page-header {
             padding: 60px 5%;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://placehold.co/1200x400/222/555?text=Simulasi+Kredit+Suzuki');
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
+            background-position: center;
             border-bottom: 1px solid #333;
         }
         .page-header h1 { font-size: 40px; margin-bottom: 10px; text-transform: uppercase; }
@@ -44,207 +91,107 @@
 
         /* KOLOM KIRI (INPUT) */
         .calc-input {
-            flex: 1;
-            min-width: 350px;
-            padding: 40px;
-            border-right: 1px solid #333;
+            flex: 1; min-width: 350px; padding: 40px; border-right: 1px solid #333;
         }
 
         .input-group { margin-bottom: 30px; }
-        .input-group label { display: flex; justify-content: space-between; margin-bottom: 10px; color: var(--accent-yellow); font-weight: bold; font-size: 14px; }
-        .input-group span { color: #fff; } /* Nilai angka di label */
+        .input-group label { 
+            display: flex; justify-content: space-between; margin-bottom: 10px; 
+            color: var(--accent-blue); font-weight: bold; font-size: 14px; 
+        }
+        .input-group span { color: #fff; }
 
         /* Styling Range Slider */
         input[type=range] {
-            width: 100%;
-            -webkit-appearance: none;
-            background: #000;
-            height: 8px;
-            border-radius: 5px;
-            outline: none;
-            border: 1px solid #444;
+            width: 100%; -webkit-appearance: none; background: #000;
+            height: 8px; border-radius: 5px; outline: none; border: 1px solid #444;
         }
         input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 25px; height: 25px;
-            background: var(--accent-yellow);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: 0.2s;
+            -webkit-appearance: none; width: 25px; height: 25px;
+            background: var(--accent-blue); /* Thumb Biru */
+            border-radius: 50%; cursor: pointer; transition: 0.2s;
         }
         input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
 
         .radio-group { display: flex; gap: 10px; margin-top: 10px; }
         .radio-btn {
-            flex: 1;
-            padding: 10px;
-            background: #000;
-            border: 1px solid #444;
-            color: #aaa;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
+            flex: 1; padding: 10px; background: #000; border: 1px solid #444;
+            color: #aaa; text-align: center; cursor: pointer; transition: 0.3s;
         }
-        /* Class active untuk tenor yang dipilih */
         .radio-btn.active {
-            background: var(--accent-yellow);
-            color: #000;
-            font-weight: bold;
-            border-color: var(--accent-yellow);
+            background: var(--accent-blue); color: #fff; font-weight: bold; border-color: var(--accent-blue);
         }
 
         /* KOLOM KANAN (HASIL) */
         .calc-result {
-            flex: 1;
-            min-width: 350px;
-            padding: 40px;
-            background-color: #1a1a1a;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            flex: 1; min-width: 350px; padding: 40px;
+            background-color: #1a1a1a; display: flex; flex-direction: column; justify-content: center;
         }
 
         .result-title { color: #aaa; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-        .result-amount { font-size: 48px; font-weight: 800; color: var(--accent-yellow); margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 30px; }
+        .result-amount { 
+            font-size: 48px; font-weight: 800; color: var(--accent-blue); /* Hasil Biru */
+            margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 30px; 
+        }
 
         .breakdown-item { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 14px; }
         .breakdown-item b { color: #fff; }
         
         .btn-apply {
             margin-top: 20px;
-            background: var(--text-main);
-            color: #000;
-            padding: 15px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: 0.3s;
+            background: var(--accent-red); /* Tombol Merah */
+            color: #fff; padding: 15px; text-align: center; text-decoration: none;
+            font-weight: bold; text-transform: uppercase; transition: 0.3s;
         }
-        .btn-apply:hover { background: var(--accent-yellow); }
+        .btn-apply:hover { background: var(--accent-blue); } /* Hover Biru */
 
         .disclaimer { font-size: 12px; color: #555; margin-top: 20px; line-height: 1.5; font-style: italic; }
 
-        footer { background: #000; padding: 20px 5%; margin-top: 50px; color: #555; border-top: 2px solid var(--accent-yellow); }
-nav {
-            background-color: #000000;
-            border-bottom: 3px solid #F9E200; /* Kuning Suzuki Sport */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            position: sticky;
-            top: 0;
-            z-index: 9999;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
+        footer { background: #000; padding: 20px 5%; margin-top: 50px; color: #555; border-top: 2px solid var(--accent-red); text-align: center; }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            font-style: italic;
-            color: #ffffff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+        /* =========================================
+           4. RESPONSIVE MEDIA QUERIES
+           ========================================= */
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            .nav-links { 
+                display: none; width: 100%; position: absolute; top: 100%; left: 0; 
+                background-color: #000; flex-direction: column; text-align: center; 
+                padding: 20px 0; border-bottom: 2px solid var(--accent-blue); 
+            }
+            .nav-links.active { display: flex; }
+            .nav-links li { margin: 15px 0; }
+        }
+         footer {
+            background-color: black;
+            color: #666;
+            padding: 50px 5%;
+            font-size: 14px;
+            border-top: 3px solid var(--accent-red); /* Border atas footer jadi MERAH */
         }
         
-        .logo i {
-            color: #F9E200; /* Logo S Kuning */
-            font-size: 28px;
-            font-style: normal;
-        }
-
-        .logo span {
-            color: #F9E200;
-            font-weight: 300;
-            margin-left: 5px;
-        }
-
-        /* Menu Desktop */
-        .nav-links {
-            list-style: none;
+        .wa-float {
+            background-color: var(--accent-blue); /* Tombol WA jadi BIRU */
+            color: white;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             display: flex;
-            gap: 25px;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links a {
-            color: #B0B0B0;
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 14px;
-            transition: 0.3s;
-            position: relative;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: #F9E200;
-        }
-
-        /* Garis bawah animasi saat hover */
-        .nav-links a::after {
-            content: '';
-            display: block;
-            width: 0;
-            height: 2px;
-            background: #F9E200;
-            transition: width 0.3s;
-            margin-top: 3px;
-        }
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Tombol Hamburger (Mobile) */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
             cursor: pointer;
-        }
-        .bar {
-            width: 25px;
-            height: 3px;
-            background-color: #F9E200;
-            margin: 3px 0;
-            transition: 0.4s;
-        }
-
-        /* RESPONSIVE (TAMPILAN HP) */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex; /* Munculkan tombol hamburger */
-            }
-
-            .nav-links {
-                display: none; /* Sembunyikan menu desktop */
-                width: 100%;
-                position: absolute;
-                top: 100%; /* Muncul tepat di bawah navbar */
-                left: 0;
-                background-color: #000;
-                flex-direction: column;
-                text-align: center;
-                padding: 20px 0;
-                border-bottom: 2px solid #F9E200;
-            }
-
-            .nav-links.active {
-                display: flex; /* Munculkan menu saat tombol diklik */
-            }
-
-            .nav-links li {
-                margin: 15px 0;
-            }
+            box-shadow: 0 0 15px rgba(41, 121, 255, 0.5); /* Glow BIRU */
+            z-index: 9999;
         }
     </style>
 </head>
 <body>
 
-   <nav>
+    <nav>
         <a href="index.html" class="logo">
             <i>S</i> SUZUKI <span>SPORT CERTIFIED</span>
         </a>
@@ -256,35 +203,14 @@ nav {
         </div>
 
         <ul class="nav-links" id="navMenu">
-            <li><a href="index.html">Beranda</a></li>
+          
             <li><a href="stok.html">Stok Unit</a></li>
             <li><a href="tradein.html">Trade-In</a></li>
-            <li><a href="kalkulator.html">Simulasi Kredit</a></li>
-            <li><a href="service.html">Layanan</a></li>
-            <li><a href="about.html">Tentang Kami</a></li>
+            <li><a href="kalkulator.html" class="active">Simulasi Kredit</a></li> <li><a href="service.html">Layanan</a></li>
+           <li><a href="about.html">Tentang Kami</a></li>
+            <li><a href="blog.html">Blog</a></li>
         </ul>
     </nav>
-
-    <script>
-        // Script untuk membuka/tutup menu di HP
-        function toggleMenu() {
-            const menu = document.getElementById('navMenu');
-            menu.classList.toggle('active');
-        }
-
-        // Script Otomatis Menandai Halaman Aktif (Opsional)
-        // Ini akan membuat menu berwarna kuning sesuai halaman yang sedang dibuka
-        document.addEventListener("DOMContentLoaded", function() {
-            const currentLocation = location.href;
-            const menuItem = document.querySelectorAll('.nav-links a');
-            const menuLength = menuItem.length;
-            for (let i = 0; i < menuLength; i++) {
-                if (menuItem[i].href === currentLocation) {
-                    menuItem[i].className = "active";
-                }
-            }
-        });
-    </script>
 
     <div class="page-header">
         <h1>Simulasi Kredit</h1>
@@ -336,7 +262,7 @@ nav {
             </div>
             <div class="breakdown-item">
                 <span>Total DP Dibayar</span>
-                <b id="hasilTotalDp" style="color: var(--accent-yellow)">Rp 0</b>
+                <b id="hasilTotalDp" style="color: var(--accent-blue)">Rp 0</b>
             </div>
 
             <a href="stok.html" class="btn-apply">Lihat Stok Mobil</a>
@@ -347,12 +273,20 @@ nav {
         </div>
 
     </div>
-
-    <footer>
-        <p>&copy; 2026 Suzuki Sport Certified.</p>
+<footer>
+        <div class="logo"><i>S</i> SUZUKI <span>SPORT CERTIFIED</span></div>
+        <br>
+        <p>Suzuki "Way of Life!"</p>
+        <p>&copy; 2026 Suzuki Indomobil Sales.</p>
     </footer>
-
     <script>
+        // 1. Script Navbar Mobile
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        // 2. Script Kalkulator
         let tenorTahun = 3; // Default tenor
 
         // Fungsi memilih Tenor (Tahun)

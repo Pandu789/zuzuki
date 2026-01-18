@@ -5,26 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Layanan & Garansi - Suzuki Sport Certified</title>
     <style>
-        /* --- CSS ROOT & NAV (SAMA) --- */
+        /* =========================================
+           1. SETUP DASAR & VARIABEL WARNA
+           ========================================= */
         :root {
             --bg-dark: #121212;
             --bg-card: #1E1E1E;
-            --accent-yellow: #F9E200;
+            
+            /* TEMA BARU: MERAH & BIRU */
+            --accent-blue: #2979FF; /* Biru Elektrik (Dominan) */
+            --accent-red: #E60012;  /* Merah Sport (Aksen) */
+            
             --text-main: #FFFFFF;
             --text-muted: #B0B0B0;
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
         body { background-color: var(--bg-dark); color: var(--text-main); }
         
-        nav { background: #000; border-bottom: 3px solid var(--accent-yellow); padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 24px; font-weight: 800; font-style: italic; color: #fff; }
-        .logo span { color: var(--accent-yellow); font-weight: 300; }
-        .nav-links a { color: #aaa; text-decoration: none; margin-left: 20px; font-weight: bold; text-transform: uppercase; font-size: 14px; }
-        .nav-links a:hover { color: var(--accent-yellow); }
+        /* =========================================
+           2. NAVBAR STYLING (SUDAH DIRAPIKAN)
+           ========================================= */
+        nav { 
+            background: #000; 
+            border-bottom: 3px solid var(--accent-red); /* Border Merah */
+            padding: 15px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        
+        /* Logo */
+        .logo { 
+            font-size: 24px; font-weight: 800; font-style: italic; color: #fff; text-decoration: none; 
+            display: flex; align-items: center; gap: 5px; 
+        }
+        .logo i { color: var(--accent-red); font-size: 28px; font-style: normal; } /* Logo S Merah */
+        .logo span { color: var(--accent-blue); font-weight: 300; margin-left: 5px; } /* Teks Sport Biru */
+        
+        /* Menu Desktop */
+        .nav-links { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
+        .nav-links a { 
+            color: #aaa; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 14px; 
+            transition: 0.3s; position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-blue); } /* Hover Biru */
 
-        /* --- LAYOUT SERVICE --- */
+        /* Garis Bawah Animasi */
+        .nav-links a::after {
+            content: ''; display: block; width: 0; height: 2px;
+            background: var(--accent-blue); transition: width 0.3s; margin-top: 3px;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+        /* Hamburger Menu (Mobile) */
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; }
+        .bar { width: 25px; height: 3px; background-color: var(--accent-blue); margin: 3px 0; transition: 0.4s; }
+
+        /* =========================================
+           3. LAYOUT PAGE CONTENT
+           ========================================= */
         .page-header {
-            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://placehold.co/1200x400/222/555?text=Mechanic+Checking+Car');
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1487754180451-c456f719a1fc?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
             padding: 80px 5%;
             text-align: center;
             border-bottom: 1px solid #333;
@@ -35,7 +83,11 @@
         /* SECTION GARANSI */
         .warranty-section { padding: 60px 5%; }
         .section-title { text-align: center; margin-bottom: 50px; text-transform: uppercase; font-size: 28px; }
-        .section-title span { color: var(--accent-yellow); border-bottom: 2px solid var(--accent-yellow); padding-bottom: 5px; }
+        .section-title span { 
+            color: var(--accent-blue); 
+            border-bottom: 2px solid var(--accent-blue); 
+            padding-bottom: 5px; 
+        }
 
         .coverage-grid {
             display: grid;
@@ -50,11 +102,9 @@
             text-align: center;
             transition: 0.3s;
         }
-        .coverage-card:hover { border-color: var(--accent-yellow); transform: translateY(-5px); }
+        .coverage-card:hover { border-color: var(--accent-red); transform: translateY(-5px); }
 
-        .icon-box {
-            font-size: 40px; margin-bottom: 20px; color: var(--accent-yellow);
-        }
+        .icon-box { font-size: 40px; margin-bottom: 20px; color: var(--accent-blue); }
         .coverage-card h3 { margin-bottom: 10px; color: #fff; }
         .coverage-card p { color: #aaa; font-size: 14px; line-height: 1.6; }
 
@@ -63,18 +113,18 @@
             display: flex;
             flex-wrap: wrap;
             background-color: #000;
-            border-top: 2px solid var(--accent-yellow);
+            border-top: 2px solid var(--accent-blue);
         }
 
         .booking-info {
             flex: 1;
             padding: 60px 5%;
             min-width: 300px;
-            background-image: url('https://placehold.co/600x600/111/333?text=Emergency+Call');
+            background-image: url('https://images.unsplash.com/photo-1615900119312-2a3a05364030?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
+            background-position: center;
             position: relative;
         }
-        /* Overlay hitam transparan */
         .booking-info::before { content:''; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); }
         .booking-info-content { position: relative; z-index: 2; }
 
@@ -90,136 +140,70 @@
         .form-group input, .form-group select {
             width: 100%; padding: 12px; background: #000; border: 1px solid #444; color: #fff;
         }
-        .form-group input[type="date"] { color-scheme: dark; } /* Agar kalender gelap */
+        .form-group input[type="date"] { color-scheme: dark; }
 
         .btn-submit {
-            width: 100%; padding: 15px; background: var(--accent-yellow); color: #000; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase;
+            width: 100%; 
+            padding: 15px; 
+            background: var(--accent-blue); /* Tombol Biru */
+            color: #fff; 
+            border: none; 
+            font-weight: bold; 
+            cursor: pointer; 
+            text-transform: uppercase;
+            transition: 0.3s;
         }
-        .btn-submit:hover { background: #fff; }
+        .btn-submit:hover { background: var(--accent-red); } /* Hover Merah */
 
         /* EMERGENCY BOX */
         .emergency-box {
-            border: 2px dashed var(--accent-yellow);
+            border: 2px dashed var(--accent-red);
             padding: 20px;
             margin-top: 30px;
             text-align: center;
         }
-        .emergency-number { font-size: 32px; font-weight: 800; color: var(--accent-yellow); display: block; margin-top: 10px; }
-nav {
-            background-color: #000000;
-            border-bottom: 3px solid #F9E200; /* Kuning Suzuki Sport */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            position: sticky;
-            top: 0;
-            z-index: 9999;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
+        .emergency-number { font-size: 32px; font-weight: 800; color: var(--accent-red); display: block; margin-top: 10px; }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            font-style: italic;
-            color: #ffffff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+        footer { background: #000; padding: 20px 5%; margin-top: 0; color: #555; text-align: center; }
+
+        /* =========================================
+           4. RESPONSIVE MEDIA QUERIES
+           ========================================= */
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            .nav-links { 
+                display: none; width: 100%; position: absolute; top: 100%; left: 0; 
+                background-color: #000; flex-direction: column; text-align: center; 
+                padding: 20px 0; border-bottom: 2px solid var(--accent-blue); 
+            }
+            .nav-links.active { display: flex; }
+            .nav-links li { margin: 15px 0; }
+        }
+         footer {
+            background-color: black;
+            color: #666;
+            padding: 50px 5%;
+            font-size: 14px;
+            border-top: 3px solid var(--accent-red); /* Border atas footer jadi MERAH */
         }
         
-        .logo i {
-            color: #F9E200; /* Logo S Kuning */
-            font-size: 28px;
-            font-style: normal;
-        }
-
-        .logo span {
-            color: #F9E200;
-            font-weight: 300;
-            margin-left: 5px;
-        }
-
-        /* Menu Desktop */
-        .nav-links {
-            list-style: none;
+        .wa-float {
+            background-color: var(--accent-blue); /* Tombol WA jadi BIRU */
+            color: white;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             display: flex;
-            gap: 25px;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links a {
-            color: #B0B0B0;
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 14px;
-            transition: 0.3s;
-            position: relative;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: #F9E200;
-        }
-
-        /* Garis bawah animasi saat hover */
-        .nav-links a::after {
-            content: '';
-            display: block;
-            width: 0;
-            height: 2px;
-            background: #F9E200;
-            transition: width 0.3s;
-            margin-top: 3px;
-        }
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Tombol Hamburger (Mobile) */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
             cursor: pointer;
+            box-shadow: 0 0 15px rgba(41, 121, 255, 0.5); /* Glow BIRU */
+            z-index: 9999;
         }
-        .bar {
-            width: 25px;
-            height: 3px;
-            background-color: #F9E200;
-            margin: 3px 0;
-            transition: 0.4s;
-        }
-
-        /* RESPONSIVE (TAMPILAN HP) */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex; /* Munculkan tombol hamburger */
-            }
-
-            .nav-links {
-                display: none; /* Sembunyikan menu desktop */
-                width: 100%;
-                position: absolute;
-                top: 100%; /* Muncul tepat di bawah navbar */
-                left: 0;
-                background-color: #000;
-                flex-direction: column;
-                text-align: center;
-                padding: 20px 0;
-                border-bottom: 2px solid #F9E200;
-            }
-
-            .nav-links.active {
-                display: flex; /* Munculkan menu saat tombol diklik */
-            }
-
-            .nav-links li {
-                margin: 15px 0;
-            }
-        }
-        footer { background: #000; padding: 20px 5%; margin-top: 0; color: #555; }
     </style>
 </head>
 <body>
@@ -236,29 +220,26 @@ nav {
         </div>
 
         <ul class="nav-links" id="navMenu">
-            <li><a href="index.html">Beranda</a></li>
+          
             <li><a href="stok.html">Stok Unit</a></li>
             <li><a href="tradein.html">Trade-In</a></li>
             <li><a href="kalkulator.html">Simulasi Kredit</a></li>
             <li><a href="service.html">Layanan</a></li>
-            <li><a href="about.html">Tentang Kami</a></li>
+           <li><a href="about.html">Tentang Kami</a></li>
+            <li><a href="blog.html">Blog</a></li>
         </ul>
     </nav>
 
     <script>
-        // Script untuk membuka/tutup menu di HP
         function toggleMenu() {
             const menu = document.getElementById('navMenu');
             menu.classList.toggle('active');
         }
-
-        // Script Otomatis Menandai Halaman Aktif (Opsional)
-        // Ini akan membuat menu berwarna kuning sesuai halaman yang sedang dibuka
+        
         document.addEventListener("DOMContentLoaded", function() {
             const currentLocation = location.href;
             const menuItem = document.querySelectorAll('.nav-links a');
-            const menuLength = menuItem.length;
-            for (let i = 0; i < menuLength; i++) {
+            for (let i = 0; i < menuItem.length; i++) {
                 if (menuItem[i].href === currentLocation) {
                     menuItem[i].className = "active";
                 }
@@ -315,7 +296,7 @@ nav {
         </div>
 
         <div class="booking-form-area">
-            <h2 style="color: var(--accent-yellow); margin-bottom: 20px; text-transform: uppercase;">Booking Service Berkala</h2>
+            <h2 style="color: var(--accent-blue); margin-bottom: 20px; text-transform: uppercase;">Booking Service Berkala</h2>
             
             <form onsubmit="kirimKeWA(event)">
                 
@@ -350,24 +331,32 @@ nav {
 
     </div>
 
-    <footer>
-        <p>&copy; 2026 Suzuki Sport Certified.</p>
+  <footer>
+        <div class="logo"><i>S</i> SUZUKI <span>SPORT CERTIFIED</span></div>
+        <br>
+        <p>Suzuki "Way of Life!"</p>
+        <p>&copy; 2026 Suzuki Indomobil Sales.</p>
     </footer>
 
     <script>
-        function kirimKeWA(e) {
-            e.preventDefault(); // Mencegah reload halaman
+        // 1. Script Navbar Mobile
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
 
-            // 1. Ambil nilai dari form
+        // 2. Script Kirim WA
+        function kirimKeWA(e) {
+            e.preventDefault();
+
             const nopol = document.getElementById('inputNopol').value;
             const layanan = document.getElementById('inputLayanan').value;
             const tanggal = document.getElementById('inputTanggal').value;
             const waUser = document.getElementById('inputWA').value;
 
-            // 2. Tentukan Nomor Admin (GANTI NOMOR INI)
+            // GANTI NOMOR INI
             const nomorAdmin = "6281234567890"; 
 
-            // 3. Format Pesan
             const pesan = `Halo Admin Suzuki Sport,%0A` +
                           `Saya ingin melakukan Booking Service.%0A%0A` +
                           `• *Nopol:* ${nopol}%0A` +
@@ -376,10 +365,7 @@ nav {
                           `• *Kontak Saya:* ${waUser}%0A%0A` +
                           `Mohon konfirmasinya. Terima kasih.`;
 
-            // 4. Buat Link WhatsApp
             const url = `https://wa.me/${nomorAdmin}?text=${pesan}`;
-
-            // 5. Buka di Tab Baru
             window.open(url, '_blank');
         }
     </script>

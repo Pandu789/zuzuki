@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cara Merawat Baterai Suzuki XL7 Hybrid - Suzuki Sport Certified</title>
+    <style>
+        /* =========================================
+           1. SETUP DASAR & VARIABEL WARNA
+           ========================================= */
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1E1E1E;
+            
+            /* TEMA BARU: MERAH & BIRU */
+            --accent-blue: #2979FF; /* Biru Elektrik */
+            --accent-red: #E60012;  /* Merah Sport */
+            
+            --text-main: #FFFFFF;
+            --text-muted: #B0B0B0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; }
+
+        /* =========================================
+           2. NAVBAR STYLING
+           ========================================= */
+        nav { 
+            background: #000; 
+            border-bottom: 3px solid var(--accent-red); 
+            padding: 15px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        
+        .logo { font-size: 24px; font-weight: 800; font-style: italic; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 5px; }
+        .logo i { color: var(--accent-red); font-size: 28px; font-style: normal; }
+        .logo span { color: var(--accent-blue); font-weight: 300; margin-left: 5px; }
+
+        .nav-links { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
+        .nav-links a { color: #aaa; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 14px; transition: 0.3s; position: relative; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-blue); }
+        
+        .nav-links a::after { content: ''; display: block; width: 0; height: 2px; background: var(--accent-blue); transition: width 0.3s; margin-top: 3px; }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; }
+        .bar { width: 25px; height: 3px; background-color: var(--accent-blue); margin: 3px 0; transition: 0.4s; }
+
+        /* =========================================
+           3. LAYOUT BLOG DETAIL
+           ========================================= */
+        .blog-wrapper {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Header Artikel */
+        .article-header h1 { font-size: 36px; margin-bottom: 10px; color: var(--text-main); line-height: 1.3; }
+        .article-meta { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; display: flex; gap: 15px; align-items: center; }
+        .category-tag { background: var(--accent-blue); color: white; padding: 2px 10px; font-weight: bold; text-transform: uppercase; font-size: 12px; }
+
+        /* Gambar Utama */
+        .main-image-container { margin-bottom: 30px; }
+        .main-img { width: 100%; height: auto; border-radius: 5px; border: 1px solid #333; }
+        .img-caption { font-size: 13px; color: #888; text-align: center; margin-top: 5px; font-style: italic; }
+
+        /* Table of Content (TOC) */
+        .toc-container {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-red);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        .toc-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .toc-header h3 { margin: 0; font-size: 18px; color: var(--accent-red); text-transform: uppercase; }
+        .toc-toggle { font-weight: bold; font-size: 20px; color: var(--text-main); }
+        .toc-list { margin-top: 15px; list-style: none; display: block; } /* Default open */
+        .toc-list.hidden { display: none; }
+        .toc-list li { margin-bottom: 8px; }
+        .toc-list a { text-decoration: none; color: var(--text-muted); transition: 0.3s; }
+        .toc-list a:hover { color: var(--accent-blue); padding-left: 5px; }
+        /* Indentasi untuk H3 */
+        .toc-sub { margin-left: 20px; font-size: 14px; border-left: 2px solid #333; padding-left: 10px; }
+
+        /* Konten Artikel */
+        .article-content p { margin-bottom: 20px; font-size: 16px; color: #ddd; }
+        .article-content h2 { font-size: 24px; color: var(--accent-blue); margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .article-content h3 { font-size: 20px; color: #fff; margin-top: 30px; margin-bottom: 10px; }
+        
+        /* Blockquote */
+        blockquote {
+            background: #1a1a1a;
+            border-left: 5px solid var(--accent-blue);
+            margin: 30px 0;
+            padding: 20px;
+            font-style: italic;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        /* Baca Juga Box */
+        .read-also {
+            background: #000;
+            border: 1px dashed var(--accent-blue);
+            padding: 15px;
+            margin: 30px 0;
+        }
+        .read-also span { font-weight: bold; color: var(--accent-red); text-transform: uppercase; margin-right: 10px; }
+        .read-also a { color: var(--text-main); text-decoration: none; font-weight: bold; border-bottom: 1px solid var(--accent-blue); }
+        .read-also a:hover { color: var(--accent-blue); }
+
+        /* Gambar Pendukung & GIF */
+        .content-img { width: 100%; margin: 20px 0; border: 1px solid #333; }
+        .promo-gif { width: 100%; border: 2px solid var(--accent-red); margin: 40px 0; }
+
+        /* FAQ Section */
+        .faq-section { margin-top: 40px; }
+        .faq-item { background: var(--bg-card); margin-bottom: 10px; padding: 15px; border-left: 3px solid var(--accent-red); }
+        .faq-item strong { display: block; color: #fff; margin-bottom: 5px; }
+
+        /* Profil Penulis */
+        .author-box {
+            display: flex; align-items: center; background: var(--bg-card); padding: 20px;
+            margin-top: 50px; border-top: 3px solid var(--accent-blue); gap: 20px;
+        }
+        .author-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-blue); }
+        .author-info h4 { margin: 0; color: #fff; font-size: 18px; }
+        .author-info span { font-size: 12px; color: var(--accent-red); font-weight: bold; text-transform: uppercase; }
+        .author-info p { font-size: 14px; color: #aaa; margin-top: 5px; }
+
+        /* Share Buttons */
+        .share-section { margin-top: 30px; text-align: center; }
+        .share-title { font-weight: bold; margin-bottom: 15px; display: block; }
+        .share-btn {
+            display: inline-block; padding: 10px 20px; margin: 0 5px; color: white; text-decoration: none; font-weight: bold; border-radius: 4px; transition: 0.3s;
+        }
+        .btn-wa { background: #25D366; }
+        .btn-fb { background: #1877F2; }
+        .btn-x { background: #000; border: 1px solid #fff; }
+        .share-btn:hover { opacity: 0.8; transform: translateY(-2px); }
+
+        /* --- 4. ARTIKEL TERKAIT --- */
+        .related-section {
+            background: #0f0f0f; padding: 60px 5%; margin-top: 60px; border-top: 1px solid #333;
+        }
+        .related-title { font-size: 24px; color: var(--accent-blue); margin-bottom: 30px; text-transform: uppercase; border-left: 5px solid var(--accent-blue); padding-left: 15px; }
+        
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .related-card {
+            background: var(--bg-card); border: 1px solid #333; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
+        }
+        .related-card:hover { border-color: var(--accent-red); transform: translateY(-5px); }
+        .related-img { width: 100%; height: 200px; object-fit: cover; }
+        .related-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+        .related-body h3 { font-size: 18px; margin-bottom: 10px; color: #fff; line-height: 1.4; }
+        .related-body p { font-size: 14px; color: #aaa; margin-bottom: 20px; flex: 1; }
+        .btn-read {
+            background: transparent; color: var(--accent-red); border: 1px solid var(--accent-red);
+            padding: 8px 15px; text-align: center; text-decoration: none; font-weight: bold;
+            text-transform: uppercase; font-size: 12px; transition: 0.3s; align-self: flex-start;
+        }
+        .btn-read:hover { background: var(--accent-red); color: white; }
+
+        /* Footer */
+        footer { background: #000; padding: 20px 5%; color: #555; text-align: center; border-top: 2px solid var(--accent-red); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            .nav-links { display: none; width: 100%; position: absolute; top: 100%; left: 0; background-color: #000; flex-direction: column; text-align: center; padding: 20px 0; border-bottom: 2px solid var(--accent-blue); }
+            .nav-links.active { display: flex; }
+            .nav-links li { margin: 15px 0; }
+            .article-header h1 { font-size: 28px; }
+            .toc-container { padding: 15px; }
+            .author-box { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <i>S</i> SUZUKI <span>SPORT CERTIFIED</span>
+        </a>
+
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+
+        <ul class="nav-links" id="navMenu">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="stok.html">Stok Unit</a></li>
+            <li><a href="tradein.html">Trade-In</a></li>
+            <li><a href="kalkulator.html">Simulasi Kredit</a></li>
+            <li><a href="service.html">Layanan</a></li>
+            <li><a href="about.html">Tentang Kami</a></li>
+            <li><a href="blog.html" class="active">Blog</a></li> </ul>
+    </nav>
+
+    <div class="blog-wrapper">
+        
+        <header class="article-header">
+            <span class="category-tag">Tips & Perawatan</span>
+            <h1>Panduan Lengkap: Cara Merawat Baterai Suzuki XL7 Hybrid Agar Awet 10 Tahun</h1>
+            <div class="article-meta">
+                <span>📅 22 Januari 2026</span>
+                <span>🕒 5 Menit Baca</span>
+                <span>👤 Oleh Admin Teknik</span>
+            </div>
+        </header>
+
+        <div class="main-image-container">
+            <img src="https://images.unsplash.com/photo-1619372795135-55c7a8bb8f7e?q=80&w=2070&auto=format&fit=crop" alt="Mesin Hybrid Suzuki" class="main-img">
+            <div class="img-caption">Teknologi SHVS (Smart Hybrid Vehicle by Suzuki) pada mesin K15B.</div>
+        </div>
+
+        <div class="toc-container">
+            <div class="toc-header" onclick="toggleToc()">
+                <h3>Daftar Isi</h3>
+                <span class="toc-toggle" id="tocIcon">−</span>
+            </div>
+            <ul class="toc-list" id="tocList"></ul>
+        </div>
+
+        <article class="article-content" id="articleBody">
+            <p>Mobil hybrid kini menjadi pilihan favorit masyarakat Indonesia karena efisiensi bahan bakarnya. Suzuki XL7 Hybrid yang menggunakan teknologi SHVS (Smart Hybrid Vehicle by Suzuki) mengandalkan baterai Lithium-ion sebagai penyimpan energi. Namun, banyak pemilik yang masih bingung bagaimana cara merawat komponen vital ini.</p>
+
+            <div class="read-also">
+                <span>Baca Juga:</span> <a href="#">Perbedaan Ertiga Hybrid vs XL7 Hybrid, Pilih Mana?</a>
+            </div>
+
+            <h2>1. Hindari Parkir Terlalu Lama Tanpa Dinyalakan</h2>
+            <p>Baterai Lithium-ion pada sistem hybrid Suzuki membutuhkan sirkulasi daya yang stabil. Jika mobil ditinggalkan lebih dari 2 minggu tanpa dinyalakan, daya baterai bisa turun drastis (self-discharge).</p>
+            
+            <blockquote>
+                "Kunci keawetan baterai hybrid adalah penggunaan rutin. Mobil hybrid dirancang untuk dikendarai, bukan disimpan lama di garasi."
+            </blockquote>
+
+            <h3>Solusi Praktis</h3>
+            <p>Jika Anda harus bepergian jauh, mintalah seseorang untuk memanaskan mobil minimal 15-20 menit setiap 3-4 hari sekali agar ISG (Integrated Starter Generator) dapat mengisi daya baterai.</p>
+
+            <h2>2. Perhatikan Indikator Baterai di MID</h2>
+            <p>Layar Multi Information Display (MID) pada Suzuki XL7 memberikan informasi real-time mengenai aliran energi. Jangan biarkan indikator baterai sering berada di level minimal (1 bar) dalam waktu lama.</p>
+
+            <img src="https://images.unsplash.com/photo-1583267746897-26414c486327?q=80&w=2070&auto=format&fit=crop" alt="Dashboard Suzuki" class="content-img">
+            <div class="img-caption">Pantau terus indikator energi pada dashboard Anda.</div>
+
+            <div class="read-also">
+                <span>Baca Juga:</span> <a href="#">Daftar Bengkel Resmi Suzuki yang Bisa Service Baterai Hybrid</a>
+            </div>
+
+            <h2>3. Jaga Kebersihan Ventilasi Baterai</h2>
+            <p>Baterai Lithium-ion pada XL7 terletak di bawah jok penumpang depan. Area ini memiliki ventilasi udara untuk pendinginan. Hindari menaruh karpet tebal atau barang-barang yang menutupi sirkulasi udara di area tersebut.</p>
+
+            <a href="tradein.html" style="display:block; text-decoration:none;">
+                <div class="promo-gif" style="background: #111; padding: 20px; text-align: center;">
+                    <h2 style="border: none; color: var(--accent-red); margin: 0;">PROMO TRADE-IN HYBRID!</h2>
+                    <p style="color:white; margin:0;">Tukar mobil lama Anda, Dapatkan Bonus 5 Juta!</p>
+                </div>
+            </a>
+
+            <h2>4. Kesimpulan</h2>
+            <p>Merawat Suzuki XL7 Hybrid sebenarnya sangat mudah dan tidak memerlukan biaya tambahan yang besar. Dengan penggunaan rutin dan pengecekan berkala di bengkel resmi, baterai Lithium-ion Suzuki yang digaransi hingga 8 tahun ini akan tetap optimal.</p>
+
+            <h2>FAQ (Pertanyaan Umum)</h2>
+            <div class="faq-section">
+                <div class="faq-item">
+                    <strong>Q: Berapa lama garansi baterai Suzuki XL7 Hybrid?</strong>
+                    <span>A: Suzuki Indonesia memberikan garansi resmi selama 8 tahun atau 160.000 km.</span>
+                </div>
+                <div class="faq-item">
+                    <strong>Q: Apakah mobil bisa jalan jika baterai rusak?</strong>
+                    <span>A: Ya, karena sistem SHVS adalah Mild Hybrid, mobil masih bisa berjalan menggunakan mesin bensin konvensional.</span>
+                </div>
+            </div>
+        </article>
+
+        <div class="share-section">
+            <span class="share-title">Bagikan artikel ini:</span>
+            <a href="#" onclick="shareTo('wa')" class="share-btn btn-wa">WhatsApp</a>
+            <a href="#" onclick="shareTo('fb')" class="share-btn btn-fb">Facebook</a>
+            <a href="#" onclick="shareTo('x')" class="share-btn btn-x">X (Twitter)</a>
+        </div>
+
+        <div class="author-box">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop" alt="Foto Penulis" class="author-img">
+            <div class="author-info">
+                <h4>Riko Pratama</h4>
+                <span>Senior Technician</span>
+                <p>Spesialis mesin hybrid dengan pengalaman lebih dari 10 tahun di Suzuki Indomobil. Hobi mengulas teknologi otomotif terbaru.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <section class="related-section">
+        <h2 class="related-title">Artikel Terkait</h2>
+        <div class="related-grid">
+            <div class="related-card">
+                <img src="https://images.unsplash.com/photo-1600329483335-8e927b0c5595?q=80&w=2071&auto=format&fit=crop" alt="Jimny Review" class="related-img">
+                <div class="related-body">
+                    <h3>Review Jujur: Jimny 5-Pintu Setelah 1 Tahun</h3>
+                    <p>Apakah masih worth it untuk harian di jalanan macet Jakarta? Simak ulasan pemilik langsung.</p>
+                    <a href="#" class="btn-read">Baca Selengkapnya</a>
+                </div>
+            </div>
+            <div class="related-card">
+                <img src="https://images.unsplash.com/photo-1623066534732-5801c76600f3?q=80&w=2070&auto=format&fit=crop" alt="Mobil Banjir" class="related-img">
+                <div class="related-body">
+                    <h3>5 Tanda Mobil Bekas Banjir</h3>
+                    <p>Jangan tertipu tampilan kinclong. Cek bagian karpet dasar dan soket listrik sebelum membeli.</p>
+                    <a href="#" class="btn-read">Baca Selengkapnya</a>
+                </div>
+            </div>
+            <div class="related-card">
+                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2071&auto=format&fit=crop" alt="Harga Pasar" class="related-img">
+                <div class="related-body">
+                    <h3>Prediksi Harga Mobil Bekas 2026</h3>
+                    <p>Analisa pasar otomotif di tengah gempuran mobil listrik China. Apakah harga Suzuki bertahan?</p>
+                    <a href="#" class="btn-read">Baca Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo"><i>S</i> SUZUKI <span>SPORT CERTIFIED</span></div>
+        <br>
+        <p>Suzuki "Way of Life!"</p>
+        <p>&copy; 2026 Suzuki Indomobil Sales.</p>
+    </footer>
+
+    <script>
+        // 1. Script Navbar Mobile
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        // 2. Script Otomatis TOC
+        document.addEventListener("DOMContentLoaded", function() {
+            const content = document.getElementById('articleBody');
+            const tocList = document.getElementById('tocList');
+            const headers = content.querySelectorAll('h2, h3');
+
+            headers.forEach((header, index) => {
+                if (!header.id) {
+                    header.id = 'section-' + index;
+                }
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = '#' + header.id;
+                a.textContent = header.textContent;
+                
+                if (header.tagName === 'H3') {
+                    li.classList.add('toc-sub');
+                }
+
+                li.appendChild(a);
+                tocList.appendChild(li);
+            });
+        });
+
+        // Toggle TOC
+        function toggleToc() {
+            const list = document.getElementById('tocList');
+            const icon = document.getElementById('tocIcon');
+            list.classList.toggle('hidden');
+            icon.textContent = list.classList.contains('hidden') ? '+' : '−';
+        }
+
+        // 3. Script Share
+        function shareTo(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(document.title);
+            let shareUrl = '';
+            if (platform === 'wa') shareUrl = `https://wa.me/?text=${text}%20${url}`;
+            else if (platform === 'fb') shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            else if (platform === 'x') shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+            window.open(shareUrl, '_blank');
+        }
+    </script>
+
+</body>
+</html>

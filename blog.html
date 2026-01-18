@@ -5,21 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog & Berita Otomotif - Suzuki Sport Certified</title>
     <style>
-        /* --- CSS ROOT (TEMA DARK SUZUKI) --- */
+        /* --- CSS ROOT (TEMA DARK SUZUKI RED & BLUE) --- */
         :root {
             --bg-dark: #121212;
             --bg-card: #1E1E1E;
-            --accent-yellow: #F9E200;
+            
+            /* WARNA BARU */
+            --accent-blue: #2979FF; /* Biru Elektrik */
+            --accent-red: #E60012;  /* Merah Sport */
+            
             --text-main: #FFFFFF;
             --text-muted: #B0B0B0;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: var(--bg-dark); color: var(--text-main); }
 
-        /* --- CSS NAVBAR (RESPONSIF) --- */
+        /* --- CSS NAVBAR --- */
         nav {
             background-color: #000;
-            border-bottom: 3px solid var(--accent-yellow);
+            border-bottom: 3px solid var(--accent-red);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -30,30 +34,32 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
         .logo { font-size: 24px; font-weight: 800; font-style: italic; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 5px; }
-        .logo i { color: var(--accent-yellow); font-size: 28px; font-style: normal; }
-        .logo span { color: var(--accent-yellow); font-weight: 300; margin-left: 5px; }
+        .logo i { color: var(--accent-red); font-size: 28px; font-style: normal; }
+        .logo span { color: var(--accent-blue); font-weight: 300; margin-left: 5px; }
         
         .nav-links { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
         .nav-links a { color: #B0B0B0; text-decoration: none; font-weight: 700; text-transform: uppercase; font-size: 14px; transition: 0.3s; position: relative; }
-        .nav-links a:hover, .nav-links a.active { color: var(--accent-yellow); }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-blue); }
         
         /* Hamburger Menu */
         .menu-toggle { display: none; flex-direction: column; cursor: pointer; }
-        .bar { width: 25px; height: 3px; background-color: var(--accent-yellow); margin: 3px 0; transition: 0.4s; }
+        .bar { width: 25px; height: 3px; background-color: var(--accent-blue); margin: 3px 0; transition: 0.4s; }
 
         @media (max-width: 768px) {
             .menu-toggle { display: flex; }
-            .nav-links { display: none; width: 100%; position: absolute; top: 100%; left: 0; background-color: #000; flex-direction: column; text-align: center; padding: 20px 0; border-bottom: 2px solid var(--accent-yellow); }
+            .nav-links { display: none; width: 100%; position: absolute; top: 100%; left: 0; background-color: #000; flex-direction: column; text-align: center; padding: 20px 0; border-bottom: 2px solid var(--accent-blue); }
             .nav-links.active { display: flex; }
             .nav-links li { margin: 15px 0; }
         }
 
         /* --- LAYOUT BLOG --- */
         .page-header {
-            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://placehold.co/1200x400/222/555?text=Blog+Otomotif+Suzuki');
+            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1583267746897-26414c486327?q=80&w=2070&auto=format&fit=crop');
             padding: 60px 5%;
             text-align: center;
             border-bottom: 1px solid #333;
+            background-size: cover;
+            background-position: center;
         }
         .page-header h1 { font-size: 42px; margin-bottom: 10px; text-transform: uppercase; }
         .page-header p { color: var(--text-muted); font-size: 18px; }
@@ -63,13 +69,14 @@
         /* KOLOM KIRI: ARTIKEL (70%) */
         .main-content { flex: 3; min-width: 300px; }
 
+        /* Featured Post */
         .featured-post {
-            background-color: var(--bg-card); border: 1px solid #333; margin-bottom: 40px; position: relative; overflow: hidden; transition: 0.3s;
+            background-color: var(--bg-card); border: 1px solid #333; margin-bottom: 40px; position: relative; overflow: hidden; transition: 0.3s; cursor: pointer;
         }
-        .featured-post:hover { border-color: var(--accent-yellow); }
+        .featured-post:hover { border-color: var(--accent-red); transform: translateY(-2px); }
         .featured-img { width: 100%; height: 350px; object-fit: cover; background: #333; }
         .featured-content { padding: 30px; }
-        .post-meta { color: var(--accent-yellow); font-size: 13px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; display: block;}
+        .post-meta { color: var(--accent-blue); font-size: 13px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; display: block;}
         .featured-title { font-size: 28px; margin-bottom: 15px; color: #fff; line-height: 1.3; }
         .featured-excerpt { color: #ccc; line-height: 1.6; margin-bottom: 20px; }
 
@@ -77,41 +84,44 @@
         .posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
 
         .post-card {
-            background-color: var(--bg-card); border: 1px solid #333; transition: 0.3s; display: flex; flex-direction: column;
+            background-color: var(--bg-card); border: 1px solid #333; transition: 0.3s; display: flex; flex-direction: column; cursor: pointer;
         }
-        .post-card:hover { transform: translateY(-5px); border-color: var(--accent-yellow); }
+        .post-card:hover { transform: translateY(-5px); border-color: var(--accent-red); }
         .post-img { width: 100%; height: 200px; object-fit: cover; background: #333; }
         .post-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
         .post-title { font-size: 18px; font-weight: bold; margin-bottom: 10px; color: #fff; line-height: 1.4; }
         .post-desc { font-size: 14px; color: #aaa; line-height: 1.6; margin-bottom: 15px; flex: 1; }
-        .read-more { color: var(--accent-yellow); text-decoration: none; font-weight: bold; font-size: 14px; text-transform: uppercase; align-self: flex-start; }
+        
+        .read-more { 
+            color: var(--accent-blue); text-decoration: none; font-weight: bold; font-size: 14px; text-transform: uppercase; align-self: flex-start; 
+        }
         .read-more:hover { text-decoration: underline; }
 
         /* KOLOM KANAN: SIDEBAR (30%) */
         .sidebar { flex: 1; min-width: 250px; }
 
         .widget { background-color: var(--bg-card); padding: 25px; border: 1px solid #333; margin-bottom: 30px; }
-        .widget h3 { border-left: 4px solid var(--accent-yellow); padding-left: 10px; margin-bottom: 20px; color: #fff; text-transform: uppercase; font-size: 18px; }
+        .widget h3 { border-left: 4px solid var(--accent-blue); padding-left: 10px; margin-bottom: 20px; color: #fff; text-transform: uppercase; font-size: 18px; }
 
         .search-box { display: flex; }
         .search-box input { width: 100%; padding: 10px; background: #000; border: 1px solid #444; color: #fff; }
-        .search-box button { background: var(--accent-yellow); border: none; padding: 0 15px; cursor: pointer; font-weight: bold; }
+        .search-box button { background: var(--accent-blue); border: none; padding: 0 15px; cursor: pointer; font-weight: bold; color: white; }
 
         .cat-list { list-style: none; }
         .cat-list li { border-bottom: 1px solid #333; padding: 10px 0; }
         .cat-list a { color: #ccc; text-decoration: none; display: flex; justify-content: space-between; transition: 0.3s; cursor: pointer;}
-        .cat-list a:hover { color: var(--accent-yellow); padding-left: 5px; }
+        .cat-list a:hover { color: var(--accent-blue); padding-left: 5px; }
         .cat-list span { background: #000; padding: 2px 8px; font-size: 12px; border-radius: 10px; }
 
         .tag-cloud { display: flex; flex-wrap: wrap; gap: 10px; }
         .tag { background: #000; color: #aaa; padding: 5px 10px; text-decoration: none; font-size: 13px; border: 1px solid #333; cursor: pointer; }
-        .tag:hover, .tag.active { border-color: var(--accent-yellow); color: var(--accent-yellow); }
+        .tag:hover, .tag.active { border-color: var(--accent-blue); color: var(--accent-blue); }
 
         .pagination { display: flex; gap: 10px; margin-top: 40px; justify-content: center; }
         .page-num { padding: 10px 15px; background: var(--bg-card); color: #fff; text-decoration: none; border: 1px solid #333; cursor: pointer; }
-        .page-num.active, .page-num:hover { background: var(--accent-yellow); color: #000; font-weight: bold; border-color: var(--accent-yellow); }
+        .page-num.active, .page-num:hover { background: var(--accent-blue); color: #fff; font-weight: bold; border-color: var(--accent-blue); }
 
-        footer { background: #000; padding: 20px 5%; margin-top: 50px; color: #555; border-top: 2px solid var(--accent-yellow); }
+        footer { background: #000; padding: 20px 5%; margin-top: 50px; color: #555; border-top: 2px solid var(--accent-red); }
 
         @media (max-width: 768px) {
             .blog-container { flex-direction: column; }
@@ -119,11 +129,10 @@
             .main-content { order: 1; }
         }
         
-        /* Indikator Filter Aktif */
         #activeFilter {
             display: none;
-            background: var(--accent-yellow);
-            color: black;
+            background: var(--accent-blue);
+            color: white;
             padding: 10px 15px;
             margin-bottom: 20px;
             font-weight: bold;
@@ -131,6 +140,31 @@
             align-items: center;
         }
         #activeFilter span { cursor: pointer; font-size: 18px; }
+         footer {
+            background-color: black;
+            color: #666;
+            padding: 50px 5%;
+            font-size: 14px;
+            border-top: 3px solid var(--accent-red); /* Border atas footer jadi MERAH */
+        }
+        
+        .wa-float {
+            background-color: var(--accent-blue); /* Tombol WA jadi BIRU */
+            color: white;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(41, 121, 255, 0.5); /* Glow BIRU */
+            z-index: 9999;
+        }
     </style>
 </head>
 <body>
@@ -143,12 +177,14 @@
             <div class="bar"></div><div class="bar"></div><div class="bar"></div>
         </div>
         <ul class="nav-links" id="navMenu">
-            <li><a href="index.html">Beranda</a></li>
-            <li><a href="stok.html">Stok Unit</a></li>
+          
+             <li><a href="stok.html">Stok Unit</a></li>
             <li><a href="tradein.html">Trade-In</a></li>
-            <li><a href="kalkulator.html">Kalkulator</a></li>
+            <li><a href="kalkulator.html">Simulasi Kredit</a></li>
             <li><a href="service.html">Layanan</a></li>
-            <li><a href="blog.html" class="active">Blog</a></li> </ul>
+           <li><a href="about.html">Tentang Kami</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            </ul>
     </nav>
 
     <div class="page-header">
@@ -165,55 +201,55 @@
                 <span onclick="resetFilter()">×</span>
             </div>
 
-            <div class="featured-post post-item" data-category="Tips" data-tags="xl7 hybrid">
-                <img src="https://placehold.co/800x400/222/555?text=Tips+Merawat+Mobil+Hybrid" class="featured-img" alt="Featured">
+            <div class="featured-post post-item" data-category="Tips" data-tags="xl7 hybrid" onclick="window.location.href='blog-detail.html'">
+                <img src="https://images.unsplash.com/photo-1619372795135-55c7a8bb8f7e?q=80&w=2070&auto=format&fit=crop" class="featured-img" alt="Featured Baterai Hybrid">
                 <div class="featured-content">
                     <span class="post-meta">Tips & Trik | 17 Jan 2026</span>
                     <h2 class="featured-title">Cara Merawat Baterai Suzuki XL7 Hybrid Agar Awet 10 Tahun</h2>
                     <p class="featured-excerpt">Teknologi SHVS (Smart Hybrid Vehicle by Suzuki) memang canggih, namun membutuhkan perlakuan khusus agar baterai Lithium-ion tetap optimal. Simak panduan lengkap dari kepala mekanik kami.</p>
-                    <a href="#" class="read-more">BACA SELENGKAPNYA →</a>
+                    <a href="blog-detail.html" class="read-more">BACA SELENGKAPNYA →</a>
                 </div>
             </div>
 
             <div class="posts-grid" id="postsGrid">
                 
-                <div class="post-card post-item" data-category="Review" data-tags="jimny review">
-                    <img src="https://placehold.co/400x300/222/555?text=Review+Jimny" class="post-img">
+                <div class="post-card post-item" data-category="Review" data-tags="jimny review" onclick="window.location.href='blog-detail.html'">
+                    <img src="https://images.unsplash.com/photo-1600329483335-8e927b0c5595?q=80&w=2071&auto=format&fit=crop" class="post-img" alt="Review Jimny">
                     <div class="post-body">
                         <span class="post-meta">Review</span>
                         <h3 class="post-title">Review Jujur: Jimny 5-Pintu Setelah 1 Tahun Pemakaian</h3>
                         <p class="post-desc">Apakah masih worth it untuk harian di jalanan macet Jakarta? Atau hanya cocok untuk offroad akhir pekan?</p>
-                        <a href="#" class="read-more">Baca Selengkapnya</a>
+                        <a href="blog-detail.html" class="read-more">Baca Selengkapnya</a>
                     </div>
                 </div>
 
-                <div class="post-card post-item" data-category="Analisa" data-tags="harga ertiga">
-                    <img src="https://placehold.co/400x300/222/555?text=Harga+Jual+Ertiga" class="post-img">
+                <div class="post-card post-item" data-category="Analisa" data-tags="harga ertiga" onclick="window.location.href='blog-detail.html'">
+                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2071&auto=format&fit=crop" class="post-img" alt="Analisa Harga">
                     <div class="post-body">
                         <span class="post-meta">Analisa Pasar</span>
                         <h3 class="post-title">Kenapa Harga Bekas Ertiga Sangat Stabil di Malang?</h3>
                         <p class="post-desc">Data menunjukkan depresiasi Ertiga lebih rendah dibanding kompetitornya. Faktor sparepart dan konsumsi BBM jadi kunci.</p>
-                        <a href="#" class="read-more">Baca Selengkapnya</a>
+                        <a href="blog-detail.html" class="read-more">Baca Selengkapnya</a>
                     </div>
                 </div>
 
-                <div class="post-card post-item" data-category="Tips" data-tags="tips beli mobil">
-                    <img src="https://placehold.co/400x300/222/555?text=Ciri+Mobil+Banjir" class="post-img">
+                <div class="post-card post-item" data-category="Tips" data-tags="tips beli mobil" onclick="window.location.href='blog-detail.html'">
+                    <img src="https://images.unsplash.com/photo-1623066534732-5801c76600f3?q=80&w=2070&auto=format&fit=crop" class="post-img" alt="Tips Mobil Banjir">
                     <div class="post-body">
                         <span class="post-meta">Tips Membeli</span>
                         <h3 class="post-title">5 Tanda Mobil Bekas Banjir yang Sering Terlewatkan</h3>
                         <p class="post-desc">Jangan tertipu tampilan kinclong. Cek bagian-bagian tersembunyi ini sebelum Anda memutuskan membeli mobil bekas.</p>
-                        <a href="#" class="read-more">Baca Selengkapnya</a>
+                        <a href="blog-detail.html" class="read-more">Baca Selengkapnya</a>
                     </div>
                 </div>
 
-                <div class="post-card post-item" data-category="Promo" data-tags="promo tradein">
-                    <img src="https://placehold.co/400x300/222/555?text=Promo+Awal+Tahun" class="post-img">
+                <div class="post-card post-item" data-category="Promo" data-tags="promo tradein" onclick="window.location.href='blog-detail.html'">
+                    <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=2070&auto=format&fit=crop" class="post-img" alt="Promo Trade In">
                     <div class="post-body">
                         <span class="post-meta">Promo</span>
                         <h3 class="post-title">Promo Trade-In Awal Tahun 2026: Cashback hingga 5 Juta</h3>
                         <p class="post-desc">Kesempatan emas untuk upgrade mobil lama Anda ke unit Suzuki Sport Certified terbaru.</p>
-                        <a href="#" class="read-more">Baca Selengkapnya</a>
+                        <a href="blog-detail.html" class="read-more">Baca Selengkapnya</a>
                     </div>
                 </div>
 
@@ -258,28 +294,28 @@
                 </div>
             </div>
 
-            <div class="widget" style="text-align: center; border: 2px dashed var(--accent-yellow);">
+            <div class="widget" style="text-align: center; border: 2px dashed var(--accent-red);">
                 <h4 style="color: #fff; margin-bottom: 10px;">Ingin Jual Mobil?</h4>
                 <p style="color: #aaa; font-size: 13px; margin-bottom: 15px;">Dapatkan penawaran harga terbaik hari ini.</p>
-                <a href="tradein.html" style="background: var(--accent-yellow); color: black; padding: 8px 15px; text-decoration: none; font-weight: bold; font-size: 12px; display: inline-block;">CEK HARGA SEKARANG</a>
+                <a href="tradein.html" style="background: var(--accent-red); color: white; padding: 8px 15px; text-decoration: none; font-weight: bold; font-size: 12px; display: inline-block;">CEK HARGA SEKARANG</a>
             </div>
 
         </aside>
 
     </div>
 
-    <footer>
-        <p>&copy; 2026 Suzuki Sport Certified.</p>
+   <footer>
+        <div class="logo"><i>S</i> SUZUKI <span>SPORT CERTIFIED</span></div>
+        <br>
+        <p>Suzuki "Way of Life!"</p>
+        <p>&copy; 2026 Suzuki Indomobil Sales.</p>
     </footer>
-
     <script>
-        // 1. Toggle Menu Navbar HP
         function toggleMenu() {
             const menu = document.getElementById('navMenu');
             menu.classList.toggle('active');
         }
 
-        // 2. Fungsi Pencarian Real-time
         function searchBlog() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let posts = document.getElementsByClassName('post-item');
@@ -299,7 +335,6 @@
             }
         }
 
-        // 3. Fungsi Filter Kategori
         function filterCategory(cat) {
             let posts = document.getElementsByClassName('post-item');
             let filterBox = document.getElementById('activeFilter');
@@ -318,7 +353,6 @@
             }
         }
 
-        // 4. Fungsi Filter Tag
         function filterTag(tagKeyword) {
             let posts = document.getElementsByClassName('post-item');
             let filterBox = document.getElementById('activeFilter');
@@ -337,7 +371,6 @@
             }
         }
 
-        // 5. Reset Filter
         function resetFilter() {
             let posts = document.getElementsByClassName('post-item');
             document.getElementById('activeFilter').style.display = "none";
@@ -348,17 +381,12 @@
             }
         }
 
-        // 6. Pagination Visual
         function changePage(element) {
-            // Hapus class active dari semua tombol
             let pages = document.getElementsByClassName('page-num');
             for(let i=0; i<pages.length; i++){
                 pages[i].classList.remove('active');
             }
-            // Tambah class active ke yang diklik
             element.classList.add('active');
-            
-            // Scroll ke atas
             window.scrollTo({top: 400, behavior: 'smooth'});
         }
     </script>

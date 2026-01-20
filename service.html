@@ -204,6 +204,106 @@
             box-shadow: 0 0 15px rgba(41, 121, 255, 0.5); /* Glow BIRU */
             z-index: 9999;
         }
+        /* Footer Container */
+        .site-footer {
+            background-color: #050505; /* Hitam sangat pekat */
+            border-top: 3px solid var(--accent-red); /* Garis Merah di atas */
+            color: #b0b0b0;
+            padding-top: 60px;
+            font-size: 14px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 0 5% 40px;
+            gap: 40px;
+        }
+
+        /* Kolom Footer */
+        .footer-col {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        /* Kolom 1: Logo & Deskripsi */
+        .footer-about .logo { margin-bottom: 20px; }
+        .footer-about p { line-height: 1.6; margin-bottom: 20px; color: #888; }
+
+        /* Judul Kolom */
+        .footer-col h3 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            border-left: 3px solid var(--accent-blue); /* Aksen Biru */
+            padding-left: 10px;
+        }
+
+        /* Kolom 2: Quick Links */
+        .footer-links ul { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-block;
+        }
+        .footer-links a:hover {
+            color: var(--accent-blue);
+            transform: translateX(5px); /* Efek geser saat hover */
+        }
+
+        /* Kolom 3: Kontak Info */
+        .contact-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .contact-icon { font-size: 18px; color: var(--accent-red); margin-top: 2px; }
+        .contact-text { color: #ccc; }
+
+        /* Kolom 4: Sosmed */
+        .social-links { display: flex; gap: 10px; }
+        .social-btn {
+            width: 40px; height: 40px;
+            background: #222;
+            color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: 0.3s;
+            border: 1px solid #333;
+        }
+        .social-btn:hover {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Copyright Bar Bawah */
+        .footer-bottom {
+            background-color: #000;
+            padding: 20px 5%;
+            text-align: center;
+            border-top: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .footer-bottom p { margin: 0; font-size: 13px; }
+        .footer-bottom-links a { color: #666; text-decoration: none; margin-left: 15px; font-size: 12px; }
+        .footer-bottom-links a:hover { color: #fff; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .footer-bottom { flex-direction: column; gap: 10px; }
+            .footer-bottom-links { margin-top: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -331,11 +431,56 @@
 
     </div>
 
-  <footer>
-        <div class="logo"><i>S</i> SUZUKI <span>SPORT CERTIFIED</span></div>
-        <br>
-        <p>Suzuki "Way of Life!"</p>
-        <p>&copy; 2026 Suzuki Indomobil Sales.</p>
+  <footer class="site-footer">
+        <div class="footer-content">
+            
+            <div class="footer-col footer-about">
+                <a href="index.html" class="logo">
+                    <i>S</i> SUZUKI <span>SPORT CERTIFIED</span>
+                </a>
+                <p>
+                    Pusat jual beli mobil bekas Suzuki berkualitas dengan standar inspeksi Jepang. 
+                    Aman, Transparan, dan Bergaransi Resmi.
+                </p>
+            </div>
+
+            <div class="footer-col footer-links">
+                <h3>Menu Utama</h3>
+                <ul>
+                    <li><a href="stok.html">› Lihat Stok Mobil</a></li>
+                    <li><a href="tradein.html">› Jual Mobil Anda</a></li>
+                    <li><a href="kalkulator.html">› Simulasi Kredit</a></li>
+                    <li><a href="service.html">› Booking Service</a></li>
+                    <li><a href="blog.html">› Berita & Tips</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Hubungi Kami</h3>
+                <div class="contact-row">
+                    <span class="contact-icon">📍</span>
+                    <span class="contact-text">Jl. Raya Otomotif No. 88, Jakarta Selatan, Indonesia.</span>
+                </div>
+                <div class="contact-row">
+                    <span class="contact-icon">📞</span>
+                    <span class="contact-text">(021) 555-9988</span>
+                </div>
+                <div class="contact-row">
+                    <span class="contact-icon">💬</span>
+                    <span class="contact-text">0812-3456-7890 (WhatsApp)</span>
+                </div>
+                <div class="contact-row">
+                    <span class="contact-icon">🕒</span>
+                    <span class="contact-text">Senin - Minggu: 08.00 - 17.00 WIB</span>
+                </div>
+            </div>
+
+           
+
+        </div>
+
+        
+        </div>
     </footer>
 
     <script>
